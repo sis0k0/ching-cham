@@ -1,0 +1,1 @@
+web: bundle exec ruby ching-cham.rb -p $PORT

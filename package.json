@@ -17,5 +17,13 @@
   "devDependencies": {
     "concurrently": "^1.0.0",
     "typescript": "^1.7.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sis0k0/ching-cham.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sis0k0/ching-cham/issues"
+  },
+  "homepage": "https://github.com/sis0k0/ching-cham"
 }

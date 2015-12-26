@@ -1,7 +1,7 @@
 {
   "name": "Ching-Cham",
   "version": "0.0.1",
-  "description": "Sinatra + Angular 2.0 tests web app",
+  "description": "Web app for tests, using Sinatra + Angular 2.0",
   "main": "ching-cham.rb",
   "author": "Stanimira Vlaeva",
   "license": "MIT",

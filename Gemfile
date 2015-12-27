@@ -9,6 +9,12 @@ gem 'sinatra-contrib'
 
 group :development do
   gem 'foreman'
+
+  gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+  gem 'guard'
+  gem 'guard-minitest', require: false
+  gem 'guard-livereload', '~> 2.4', require: false
+  gem 'guard-bundler', require: false
 end
 
 group :test do

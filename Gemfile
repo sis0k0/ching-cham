@@ -6,6 +6,7 @@ gem 'multi_json', '~> 1.11'
 gem 'rack'
 gem 'rake'
 gem 'sinatra-contrib'
+gem "mongoid", "~> 4.0.0"
 
 group :development do
   gem 'foreman'

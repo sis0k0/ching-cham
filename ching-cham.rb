@@ -5,6 +5,11 @@ require 'bundler/setup'
 Bundler.require :default, ENV['RACK_ENV'].to_sym
 Mongoid.load!('./mongoid.yml')
 
+require_relative './models/user'
+require_relative './models/test'
+require_relative './models/question'
+require_relative './models/score'
+
 module JsonHelpers
   def json(hash)
     MultiJson.dump(hash, pretty: true)

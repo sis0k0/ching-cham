@@ -5,6 +5,8 @@ require 'bundler/setup'
 Bundler.require :default, ENV['RACK_ENV'].to_sym
 Mongoid.load!('./mongoid.yml')
 
+require_relative './utilities/password'
+
 require_relative './models/user'
 require_relative './models/test'
 require_relative './models/question'

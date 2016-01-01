@@ -8,4 +8,9 @@ describe 'App::Story', :story do
     last_response.body.wont_be_nil
     last_response.body.wont_be_empty
   end
+
+  it 'test_db' do
+    user = User.new(username: "sis0k0")
+    user.wont_be_nil
+  end
 end

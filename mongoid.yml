@@ -1,7 +1,13 @@
 development:
   sessions:
     default:
-      database: mongoid
+      database: ching_cham
+      hosts:
+        - localhost:27017
+test:
+  sessions:
+    default:
+      database: ching_cham_test
       hosts:
         - localhost:27017
 production:

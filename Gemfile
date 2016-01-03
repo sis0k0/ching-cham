@@ -1,13 +1,14 @@
 source 'https://rubygems.org'
 ruby '2.2.3'
 gem 'sinatra', '~> 1.4', require: 'sinatra/base'
+gem 'thin', '~> 1.6.4'
 gem 'slim', '~> 3.0'
 gem 'multi_json', '~> 1.11'
 gem 'rack'
 gem 'rake'
 gem 'sinatra-contrib'
 gem 'mongoid', '~> 4.0.0'
-gem 'bcrypt-ruby'
+gem 'bcrypt'
 
 group :development do
   gem 'foreman'

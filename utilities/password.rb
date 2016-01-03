@@ -1,17 +1,14 @@
+require 'bcrypt'
+
 module BCrypt
   class Password < String
     class << self
       def mongoize(password)
-        password.mongoize
+        self.create(password).mongoize
       end
 
       def demongoize(password)
-        # password = self.new(password) if password.is_a? String
-        case password
-        when String then self.new(password)
-        when nil then nil
-        else password
-        end
+        self.new password
       end
 
       def evolve(password)

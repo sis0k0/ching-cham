@@ -8,7 +8,11 @@ gem 'rack'
 gem 'rake'
 gem 'sinatra-contrib'
 gem 'mongoid', '~> 4.0.0'
-gem 'bcrypt'
+if Bundler::WINDOWS
+  gem 'bcrypt-ruby', '~> 3.0.0', require: false
+else
+  gem 'bcrypt', '~> 3.1.10', require: false
+end
 
 group :development do
   gem 'foreman'

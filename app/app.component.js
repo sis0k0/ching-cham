@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', './home/home.component', './login/login.component', './register/register.component', './tests/tests.component', './create-test/create-test.component'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,12 +8,30 @@ System.register(['angular2/core'], function(exports_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, router_1, home_component_1, login_component_1, register_component_1, tests_component_1, create_test_component_1;
     var AppComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
+            },
+            function (home_component_1_1) {
+                home_component_1 = home_component_1_1;
+            },
+            function (login_component_1_1) {
+                login_component_1 = login_component_1_1;
+            },
+            function (register_component_1_1) {
+                register_component_1 = register_component_1_1;
+            },
+            function (tests_component_1_1) {
+                tests_component_1 = tests_component_1_1;
+            },
+            function (create_test_component_1_1) {
+                create_test_component_1 = create_test_component_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -22,8 +40,16 @@ System.register(['angular2/core'], function(exports_1) {
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: '<h1>Ching cham!!</h1>'
-                    }), 
+                        template: '<router-outlet></router-outlet>',
+                        directives: [router_1.ROUTER_DIRECTIVES],
+                    }),
+                    router_1.RouteConfig([
+                        { path: '/', name: 'Home', component: home_component_1.HomeComponent, useAsDefault: true },
+                        { path: '/login', name: 'Login', component: login_component_1.LoginComponent },
+                        { path: '/register', name: 'Register', component: register_component_1.RegisterComponent },
+                        { path: '/tests', name: 'Tests', component: tests_component_1.TestsComponent },
+                        { path: '/create-test', name: 'CreateTest', component: create_test_component_1.CreateTestComponent },
+                    ]), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
                 return AppComponent;

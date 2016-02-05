@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1) {
+System.register(['angular2/core', '../models/user'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,20 +8,34 @@ System.register(['angular2/core'], function(exports_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, user_1;
     var LoginComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (user_1_1) {
+                user_1 = user_1_1;
             }],
         execute: function() {
             LoginComponent = (function () {
                 function LoginComponent() {
+                    this.roles = ['user', 'admin'];
+                    this.model = new user_1.User('sis0k0', 'shalqlq');
+                    this.submitted = false;
+                    this.active = true;
                 }
+                LoginComponent.prototype.onSubmit = function () { this.submitted = true; };
+                LoginComponent.prototype.reset = function () {
+                    var _this = this;
+                    this.model = new user_1.User('', '');
+                    this.active = false;
+                    setTimeout(function () { return _this.active = true; }, 0);
+                };
                 LoginComponent = __decorate([
                     core_1.Component({
-                        template: "\n    <h2>Login</h2>\n    <p>Login here</p>"
+                        templateUrl: 'app/login/login.html'
                     }), 
                     __metadata('design:paramtypes', [])
                 ], LoginComponent);

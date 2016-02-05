@@ -3,13 +3,13 @@ development:
     default:
       database: ching_cham
       hosts:
-        - localhost:27017
+        - 127.0.0.1:27017
 test:
   sessions:
     default:
       database: ching_cham_test
       hosts:
-        - localhost:27017
+        - 127.0.0.1:27017
 production:
   sessions:
     default:

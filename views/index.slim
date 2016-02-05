@@ -5,7 +5,8 @@ html
     title Ching Cham
     meta name="keywords" content="tests cool"
     meta name="author" content="sis0k0"
-    //- link rel="icon" type="image/png" href=file_path("favicon.png")
+    link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"
+    link rel="stylesheet" href="app/styles/styles.css"
 
     script src="node_modules/angular2/bundles/angular2-polyfills.js"
     script src="node_modules/systemjs/dist/system.src.js"
@@ -28,22 +29,3 @@ html
   base href="/"
   body
     my-app Loading...
-
-    //- #content
-    //-   p This example shows you how a basic Slim file looks.
-
-    //- == yield
-
-    //- - if items.any?
-    //-   table#items
-    //-     - for item in items
-    //-       tr
-    //-         td.name = item.name
-    //-         td.price = item.price
-    //- - else
-    //-   p No items found. Please add some inventory.
-    //-     Thank you!
-
-    //- div id="footer"
-    //-   == render 'footer'
-    //-   | Copyright &copy; #{@year} #{@author}

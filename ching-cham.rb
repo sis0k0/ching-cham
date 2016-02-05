@@ -41,9 +41,6 @@ module Api
         user = User.find(params['id'])
         json(success: 'success', user: user)
       end
-
-      
-      
     end
 
     run! if app_file == $0

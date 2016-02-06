@@ -20,6 +20,7 @@ module Api
     configure do
       set :public_folder, File.dirname(__FILE__)
       enable :sessions, :loggin, :raise_errors, :show_exceptions
+      set :show_exceptions, :after_handler
 
       register ::Sinatra::Namespace
       register ::Sinatra::Auth
@@ -40,6 +41,18 @@ module Api
       get '/user/:id' do protected(id: params['id'], role: 'admin')
         user = User.find(params['id'])
         json(success: 'success', user: user)
+      end
+
+      error Mongoid::Errors::DocumentNotFound do |error|
+        halt 404, "#{error.klass} not found."
+      end
+
+      error Mongoid::Errors::MongoidError do |error|
+        halt 400, error.message
+      end
+
+      error 500 do
+        halt 500, "Something (really) bad happened! Please, try again later!"
       end
     end
 

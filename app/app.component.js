@@ -44,8 +44,8 @@ System.register(['angular2/core', 'angular2/router', './home/home.component', '.
                         directives: [router_1.ROUTER_DIRECTIVES],
                     }),
                     router_1.RouteConfig([
-                        { path: '/', name: 'Home', component: login_component_1.LoginComponent, useAsDefault: true },
-                        { path: '/login', name: 'Login', component: home_component_1.HomeComponent },
+                        { path: '/', name: 'Home', component: home_component_1.HomeComponent, useAsDefault: true },
+                        { path: '/login', name: 'Login', component: login_component_1.LoginComponent },
                         { path: '/register', name: 'Register', component: register_component_1.RegisterComponent },
                         { path: '/tests', name: 'Tests', component: tests_component_1.TestsComponent },
                         { path: '/create-test', name: 'CreateTest', component: create_test_component_1.CreateTestComponent },

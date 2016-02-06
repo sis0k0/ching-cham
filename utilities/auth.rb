@@ -34,18 +34,22 @@ module Sinatra
       app.helpers Auth::Helpers
 
       app.post '/api/register' do
-        # user = User.new(params[:user])
-        user = User.new(username: params[:username], email: params[:email])
+        user_details = parsed_params[:user]
 
-        user.password = params[:password]
+        # user = User.new(parsed_params[:user])
+        user = User.new(username: user_details[:username], email: user_details[:email])
+
+        user.password = user_details[:password]
         user.save!
 
         login user
       end
 
       app.post '/api/login' do
-        user = User.find_by(username: params['username'])
-        password_correct(user, params['password']) ? login(user) : halt(422) 
+        user_details = parsed_params[:user]
+
+        user = User.find_by(username: user_details[:username])
+        password_correct(user, user_details[:password]) ? login(user) : halt(422, 'Wrong username/password!') 
       end
 
       app.get '/api/logout/' do

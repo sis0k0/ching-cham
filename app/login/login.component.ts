@@ -1,18 +1,37 @@
 import {Component} from 'angular2/core';
-import {NgForm}    from 'angular2/common';
-import { User }    from '../models/user';
+import {NgForm} from 'angular2/common';
+import {HTTP_PROVIDERS} from 'angular2/http';
+import { User } from '../models/user';
+import {UserService} from '../services/user.service';
+import {Router} from 'angular2/router';
 
 @Component({
-  templateUrl: 'app/login/login.html'
+  templateUrl: 'app/login/login.html',
+  providers: [
+    HTTP_PROVIDERS,
+    UserService,
+  ],
 })
 
 export class LoginComponent {
-  roles = ['user', 'admin'];
+  constructor(
+    private _router: Router,
+    private _userService: UserService) { }
 
-  model = new User('sis0k0', 'shalqlq');
+  model = new User('', '');
+  errorMessage: string;
 
-  submitted = false;
-  onSubmit() { this.submitted = true; }
+  onSubmit() {
+    this.errorMessage = '';
+    this._userService.login(this.model)
+                      .subscribe(
+                        user => {
+                          localStorage.setItem('username', user.username);
+                          console.log(localStorage);
+                          this._router.parent.navigate(['Home']);
+                        },
+                        error => this.errorMessage = <any>error);
+  }
 
   active = true;
   reset() {

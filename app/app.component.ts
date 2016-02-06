@@ -14,8 +14,8 @@ import {CreateTestComponent} from './create-test/create-test.component';
 })
 
 @RouteConfig([
-    { path: '/', name: 'Home', component: LoginComponent, useAsDefault: true },
-    { path: '/login', name: 'Login', component: HomeComponent },
+    { path: '/', name: 'Home', component: HomeComponent, useAsDefault: true },
+    { path: '/login', name: 'Login', component: LoginComponent },
     { path: '/register', name: 'Register', component: RegisterComponent },
     { path: '/tests', name: 'Tests', component: TestsComponent },
     { path: '/create-test', name: 'CreateTest', component: CreateTestComponent},

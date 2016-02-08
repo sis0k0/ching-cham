@@ -40,8 +40,7 @@ System.register(['angular2/core', 'angular2/http', '../models/user', '../service
                     this.errorMessage = '';
                     this._userService.login(this.model)
                         .subscribe(function (user) {
-                        localStorage.setItem('username', user.username);
-                        console.log(localStorage);
+                        sessionStorage.setItem('username', user.username);
                         _this._router.parent.navigate(['Home']);
                     }, function (error) { return _this.errorMessage = error; });
                 };

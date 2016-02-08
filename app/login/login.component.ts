@@ -26,8 +26,7 @@ export class LoginComponent {
     this._userService.login(this.model)
                       .subscribe(
                         user => {
-                          localStorage.setItem('username', user.username);
-                          console.log(localStorage);
+                          sessionStorage.setItem('username', user.username);
                           this._router.parent.navigate(['Home']);
                         },
                         error => this.errorMessage = <any>error);

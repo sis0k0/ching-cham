@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1) {
+System.register(['angular2/core', 'angular2/http', '../models/user', '../services/user.service', 'angular2/router'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,22 +8,57 @@ System.register(['angular2/core'], function(exports_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, http_1, user_1, user_service_1, router_1;
     var RegisterComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (http_1_1) {
+                http_1 = http_1_1;
+            },
+            function (user_1_1) {
+                user_1 = user_1_1;
+            },
+            function (user_service_1_1) {
+                user_service_1 = user_service_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             }],
         execute: function() {
             RegisterComponent = (function () {
-                function RegisterComponent() {
+                function RegisterComponent(_router, _userService) {
+                    this._router = _router;
+                    this._userService = _userService;
+                    this.model = new user_1.User('', '', '');
+                    this.active = true;
                 }
+                RegisterComponent.prototype.onSubmit = function () {
+                    var _this = this;
+                    this.errorMessage = '';
+                    this._userService.register(this.model)
+                        .subscribe(function (user) {
+                        sessionStorage.setItem('username', user.username);
+                        _this._router.parent.navigate(['Home']);
+                    }, function (error) { return _this.errorMessage = error; });
+                };
+                RegisterComponent.prototype.reset = function () {
+                    var _this = this;
+                    this.model = new user_1.User('', '', '');
+                    this.active = false;
+                    setTimeout(function () { return _this.active = true; }, 0);
+                };
                 RegisterComponent = __decorate([
                     core_1.Component({
-                        template: '<h1>Register!!</h1>',
+                        templateUrl: 'app/register/register.html',
+                        providers: [
+                            http_1.HTTP_PROVIDERS,
+                            user_service_1.UserService,
+                        ],
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [router_1.Router, user_service_1.UserService])
                 ], RegisterComponent);
                 return RegisterComponent;
             })();

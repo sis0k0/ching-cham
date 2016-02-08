@@ -8,15 +8,25 @@ export class UserService {
   constructor (private http: Http) {}
 
   private _loginUrl = '/api/login';
+  private _registerUrl = '/api/register';
 
   login (user: any) : Observable<User>  {
-
     let body = JSON.stringify({ user });
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
     return this.http.post(this._loginUrl, body, options)
                     .map(res => <User> res.json().user)
+                    .catch(this.handleError)
+  }
+
+  register (user: any) : Observable<User> {
+    let body = JSON.stringify({ user });
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post(this._registerUrl, body, options)
+                    .map(res=> <User> res.json().user)
                     .catch(this.handleError)
   }
 

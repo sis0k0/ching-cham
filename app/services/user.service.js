@@ -26,12 +26,21 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                 function UserService(http) {
                     this.http = http;
                     this._loginUrl = '/api/login';
+                    this._registerUrl = '/api/register';
                 }
                 UserService.prototype.login = function (user) {
                     var body = JSON.stringify({ user: user });
                     var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
                     var options = new http_1.RequestOptions({ headers: headers });
                     return this.http.post(this._loginUrl, body, options)
+                        .map(function (res) { return res.json().user; })
+                        .catch(this.handleError);
+                };
+                UserService.prototype.register = function (user) {
+                    var body = JSON.stringify({ user: user });
+                    var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+                    var options = new http_1.RequestOptions({ headers: headers });
+                    return this.http.post(this._registerUrl, body, options)
                         .map(function (res) { return res.json().user; })
                         .catch(this.handleError);
                 };

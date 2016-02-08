@@ -9,7 +9,7 @@ import {CreateTestComponent} from './create-test/create-test.component';
 
 @Component({
     selector: 'my-app',
-    template: '<router-outlet></router-outlet>',
+    templateUrl: 'app/navigation/navigation.html',
     directives: [ROUTER_DIRECTIVES],
 })
 
@@ -21,4 +21,13 @@ import {CreateTestComponent} from './create-test/create-test.component';
     { path: '/create-test', name: 'CreateTest', component: CreateTestComponent},
 ])
 
-export class AppComponent { }
+export class AppComponent {
+  username: string;
+
+  constructor() {
+  }
+
+  ngDoCheck() {
+    this.username = sessionStorage.getItem('username');
+  }
+}

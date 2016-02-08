@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Ching Cham</a>
+    </div>
+    <div [hidden]='username'>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a [routerLink]="['Login']">Login</a></li>
+        <li><a [routerLink]="['Register']">Register</a></li>
+      </ul>
+    </div>
+
+    <div [hidden]='!username'>
+      <ul class="nav navbar-nav navbar-right">
+        <li>Howdy, {{username}}!</li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<router-outlet></router-outlet>

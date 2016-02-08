@@ -37,10 +37,13 @@ System.register(['angular2/core', 'angular2/router', './home/home.component', '.
             AppComponent = (function () {
                 function AppComponent() {
                 }
+                AppComponent.prototype.ngDoCheck = function () {
+                    this.username = sessionStorage.getItem('username');
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: '<router-outlet></router-outlet>',
+                        templateUrl: 'app/navigation/navigation.html',
                         directives: [router_1.ROUTER_DIRECTIVES],
                     }),
                     router_1.RouteConfig([

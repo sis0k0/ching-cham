@@ -27,6 +27,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                     this.http = http;
                     this._loginUrl = '/api/login';
                     this._registerUrl = '/api/register';
+                    this._logoutUrl = '/api/logout';
                 }
                 UserService.prototype.login = function (user) {
                     var body = JSON.stringify({ user: user });
@@ -42,6 +43,13 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                     var options = new http_1.RequestOptions({ headers: headers });
                     return this.http.post(this._registerUrl, body, options)
                         .map(function (res) { return res.json().user; })
+                        .catch(this.handleError);
+                };
+                UserService.prototype.logout = function () {
+                    var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+                    var options = new http_1.RequestOptions({ headers: headers });
+                    return this.http.post(this._logoutUrl, '', options)
+                        .map(function (res) { return res.status.toString(); })
                         .catch(this.handleError);
                 };
                 UserService.prototype.handleError = function (error) {

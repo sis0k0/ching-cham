@@ -5,7 +5,7 @@
     <form *ngIf="active" (ngSubmit)="onSubmit()" #heroForm="ngForm">
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" class="form-control" required
+        <input type="email" class="form-control" autofocus required
           [(ngModel)]="model.email"
           ngControl="email" #email="ngForm">
         <div [hidden]="email.valid || email.pristine" class="alert alert-danger">

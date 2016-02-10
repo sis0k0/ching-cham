@@ -52,7 +52,7 @@ module Sinatra
         password_correct(user, user_details[:password]) ? login(user) : halt(422, 'Wrong username/password!') 
       end
 
-      app.get '/api/logout/' do
+      app.post '/api/logout' do
         logout
       end
     end

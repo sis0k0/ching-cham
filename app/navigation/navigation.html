@@ -12,7 +12,8 @@
 
     <div [hidden]='!username'>
       <ul class="nav navbar-nav navbar-right">
-        <li>Howdy, {{username}}!</li>
+        <li><a href="#">Howdy, {{username}}!</a></li>
+        <li><a href="#" (click)="logout()">Logout</a></li>
       </ul>
     </div>
   </div>

@@ -5,7 +5,7 @@
     <form *ngIf="active" (ngSubmit)="onSubmit()" #heroForm="ngForm">
       <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" class="form-control" required
+        <input type="text" class="form-control" autofocus required
           [(ngModel)]="model.username"
           ngControl="username" #username="ngForm">
         <div [hidden]="username.valid || username.pristine" class="alert alert-danger">

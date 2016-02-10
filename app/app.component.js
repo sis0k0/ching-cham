@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './home/home.component', './login/login.component', './register/register.component', './tests/tests.component', './create-test/create-test.component'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', 'angular2/http', './home/home.component', './login/login.component', './register/register.component', './tests/tests.component', './create-test/create-test.component', './services/user.service'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/router', './home/home.component', '.
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, home_component_1, login_component_1, register_component_1, tests_component_1, create_test_component_1;
+    var core_1, router_1, http_1, home_component_1, login_component_1, register_component_1, tests_component_1, create_test_component_1, user_service_1;
     var AppComponent;
     return {
         setters:[
@@ -17,6 +17,9 @@ System.register(['angular2/core', 'angular2/router', './home/home.component', '.
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (http_1_1) {
+                http_1 = http_1_1;
             },
             function (home_component_1_1) {
                 home_component_1 = home_component_1_1;
@@ -32,19 +35,36 @@ System.register(['angular2/core', 'angular2/router', './home/home.component', '.
             },
             function (create_test_component_1_1) {
                 create_test_component_1 = create_test_component_1_1;
+            },
+            function (user_service_1_1) {
+                user_service_1 = user_service_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent() {
+                function AppComponent(_router, _userService) {
+                    this._router = _router;
+                    this._userService = _userService;
                 }
                 AppComponent.prototype.ngDoCheck = function () {
                     this.username = sessionStorage.getItem('username');
+                };
+                AppComponent.prototype.logout = function () {
+                    var _this = this;
+                    this._userService.logout()
+                        .subscribe(function (success) {
+                        sessionStorage.clear();
+                        _this._router.parent.navigate(['Home']);
+                    }, function (error) { return _this.errorMessage = error; });
                 };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
                         templateUrl: 'app/navigation/navigation.html',
                         directives: [router_1.ROUTER_DIRECTIVES],
+                        providers: [
+                            http_1.HTTP_PROVIDERS,
+                            user_service_1.UserService,
+                        ],
                     }),
                     router_1.RouteConfig([
                         { path: '/', name: 'Home', component: home_component_1.HomeComponent, useAsDefault: true },
@@ -53,7 +73,7 @@ System.register(['angular2/core', 'angular2/router', './home/home.component', '.
                         { path: '/tests', name: 'Tests', component: tests_component_1.TestsComponent },
                         { path: '/create-test', name: 'CreateTest', component: create_test_component_1.CreateTestComponent },
                     ]), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [router_1.Router, user_service_1.UserService])
                 ], AppComponent);
                 return AppComponent;
             })();

@@ -6,6 +6,7 @@ Bundler.require :default, ENV['RACK_ENV'].to_sym
 Mongoid.load!('./mongoid.yml')
 
 require_relative './utilities/auth'
+require_relative './utilities/tests'
 require_relative './utilities/password'
 require_relative './utilities/json_helpers'
 
@@ -24,6 +25,7 @@ module Api
 
       register ::Sinatra::Namespace
       register ::Sinatra::Auth
+      register ::Sinatra::Tests
     end
 
     helpers JsonHelpers

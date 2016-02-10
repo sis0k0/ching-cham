@@ -1,2 +1,16 @@
-<p> {{ test.name }} </p>
-<p>{{ test }}</p>
+<div class="container">
+  <h1>{{ test.name }}</h1>
+  <form (ngSubmit)="loadTest()" #difficultyForm="ngForm">
+
+    <div class="form-group">
+      <label for="difficulty">Test Difficulty</label>
+      <select class="form-control" required
+        [(ngModel)]="difficulty"
+          ngControl="difficulty" #diff="ngForm" >
+        <option *ngFor="#d of difficulties" [value]="d">{{d}}</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-large">Start test</button>
+  </form>
+</div>

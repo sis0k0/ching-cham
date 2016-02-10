@@ -18,19 +18,32 @@ module Sinatra
       end
 
       def select_questions(questions, difficulty)
-        return questions if questions.count <= 10
+        return questions if questions.size <= 10
 
-        questions.sort_by { |q| q.difficulty }.
-          take(extract_size(questions.length)).
-          sample(10)
+        sorted_questions = questions.sort_by { |q| q.difficulty }
+        extract(sorted_questions, difficulty).sample(10)
+      end
+
+      def extract(questions, difficulty)
+        size = extract_size(questions.length)
+
+        case difficulty.downcase
+        when 'easy'
+          questions.take(size)
+        when 'intermediate'
+          questions.slice((questions.length - size)/2, size)
+        when 'hard'
+          questions.reverse.take(size)
+        else
+          questions.sample(10)
         end
       end
 
       def extract_size(questions_count)
         if questions_count >= 50
-          (questions * 30) / 100
+          (questions_count * 30) / 100
         else
-          10 + (questions * 30) / 100
+          10 + (questions_count * 30) / 100
         end
       end
     end
@@ -51,9 +64,9 @@ module Sinatra
       end
 
       app.get '/api/test/:name/:difficulty' do
-        test = Test.find_by(name: params['name'])
+        test = Test.find_by(name: params['name']).clone
         test.questions = select_questions(test.questions, params['difficulty'])
-        
+
         json(status: 'success', test: test)
       end
     end

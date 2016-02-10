@@ -35,17 +35,15 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', '../models
                 function TestComponent(_testService, _params) {
                     this._testService = _testService;
                     this._params = _params;
+                    this.difficulties = ['Easy', 'Intermediate', 'High'];
                     this.difficulty = 'Intermediate';
                     this.questions = [new question_1.Question('', '')];
-                    this.test = new test_1.Test('', this.questions);
+                    this.test = new test_1.Test(this._params.get('name'), this.questions);
                 }
                 TestComponent.prototype.loadTest = function () {
                     var _this = this;
                     this._testService.get(this._params.get('name'), this.difficulty)
-                        .subscribe(function (test) {
-                        _this.test = test;
-                        console.log(_this.test);
-                    }, function (error) { return _this.errorMessage = error; });
+                        .subscribe(function (test) { return _this.test = test; }, function (error) { return _this.errorMessage = error; });
                 };
                 TestComponent = __decorate([
                     core_1.Component({

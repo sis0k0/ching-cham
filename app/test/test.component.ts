@@ -15,25 +15,22 @@ import {TestService} from '../services/test.service';
 })
 
 export class TestComponent {
-  difficulty:string = 'Intermediate';
+  difficulties = ['Easy', 'Intermediate', 'High'];
+  difficulty: string = 'Intermediate';
   errorMessage: string;
-  questions: Question[] = [new Question('', '')];
-  test:Test = new Test('', this.questions);
 
   constructor(
     private _testService: TestService,
     private _params: RouteParams
    ) { }
   
+  questions: Question[] = [new Question('', '')];
+  test:Test = new Test(this._params.get('name'), this.questions);
+
   loadTest() {
     this._testService.get(this._params.get('name'), this.difficulty)
       .subscribe(
-      test => {
-        this.test = test;
-        console.log(this.test);
-      },
+      test => this.test = test,
       error => this.errorMessage = <any>error);
-
   }
-
 }

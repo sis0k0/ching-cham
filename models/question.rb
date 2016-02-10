@@ -25,7 +25,6 @@ class Question
   private
 
   def calculate_difficulty
-    p @answers_count
     if(self.answers_count != 0)
       if(@correct_answers_count == 0)
         time_difficulty = 1

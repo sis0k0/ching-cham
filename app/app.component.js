@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', 'angular2/http', './home/home.component', './login/login.component', './register/register.component', './tests/tests.component', './create-test/create-test.component', './services/user.service'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', 'angular2/http', './home/home.component', './login/login.component', './register/register.component', './tests/tests.component', './create-test/create-test.component', './test/test.component', './services/user.service'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', './home/ho
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, http_1, home_component_1, login_component_1, register_component_1, tests_component_1, create_test_component_1, user_service_1;
+    var core_1, router_1, http_1, home_component_1, login_component_1, register_component_1, tests_component_1, create_test_component_1, test_component_1, user_service_1;
     var AppComponent;
     return {
         setters:[
@@ -35,6 +35,9 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', './home/ho
             },
             function (create_test_component_1_1) {
                 create_test_component_1 = create_test_component_1_1;
+            },
+            function (test_component_1_1) {
+                test_component_1 = test_component_1_1;
             },
             function (user_service_1_1) {
                 user_service_1 = user_service_1_1;
@@ -71,6 +74,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', './home/ho
                         { path: '/login', name: 'Login', component: login_component_1.LoginComponent },
                         { path: '/register', name: 'Register', component: register_component_1.RegisterComponent },
                         { path: '/tests', name: 'Tests', component: tests_component_1.TestsComponent },
+                        { path: '/test/:name', name: 'Test', component: test_component_1.TestComponent },
                         { path: '/create-test', name: 'CreateTest', component: create_test_component_1.CreateTestComponent },
                     ]), 
                     __metadata('design:paramtypes', [router_1.Router, user_service_1.UserService])

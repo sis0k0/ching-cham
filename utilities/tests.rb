@@ -32,6 +32,11 @@ module Sinatra
         tests = Test.all
         json(status: 'success', tests: tests)
       end
+
+      app.get '/api/test/:name' do
+        test = Test.find_by(name: params['name'])
+        json(status: 'success', test: test)
+      end
     end
   end
 

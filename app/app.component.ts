@@ -7,6 +7,7 @@ import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import {TestsComponent} from './tests/tests.component';
 import {CreateTestComponent} from './create-test/create-test.component';
+import {TestComponent} from './test/test.component';
 
 import {UserService} from './services/user.service';
 
@@ -25,6 +26,7 @@ import {UserService} from './services/user.service';
   { path: '/login', name: 'Login', component: LoginComponent },
   { path: '/register', name: 'Register', component: RegisterComponent },
   { path: '/tests', name: 'Tests', component: TestsComponent },
+  { path: '/test/:name', name: 'Test', component: TestComponent },
   { path: '/create-test', name: 'CreateTest', component: CreateTestComponent},
 ])
 

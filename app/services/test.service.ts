@@ -7,8 +7,8 @@ import {Observable} from 'rxjs/Observable';
 export class TestService {
   constructor (private http: Http) {}
 
-  private _testUrl = '/api/test'
-  private _allTestsUrl = '/api/tests'
+  private _testUrl = '/api/test';
+  private _allTestsUrl = '/api/tests';
 
   create (test: any) : Observable<Test> {
     let body = JSON.stringify({ test });
@@ -16,14 +16,20 @@ export class TestService {
     let options = new RequestOptions({ headers: headers });
 
     return this.http.post(this._testUrl, body, options)
-                    .map(res => <Test> res.json().test)
-                    .catch(this.handleError)
+                    .map(res => <Test>res.json().test)
+                    .catch(this.handleError);
   }
 
   getAll () : Observable<Array<Test>> {
     return this.http.get(this._allTestsUrl)
-                    .map(res => <Array<Test>> res.json().tests)
-                    .catch(this.handleError)
+                    .map(res => <Array<Test>>res.json().tests)
+                    .catch(this.handleError);
+  }
+
+  get (name: string) : Observable<Test> {
+    return this.http.get(this._testUrl + '/' + name)
+                .map(res => <Test>res.json().test)
+                .catch(this.handleError);
   }
 
   private handleError (error: Response) {

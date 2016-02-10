@@ -41,6 +41,11 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                         .map(function (res) { return res.json().tests; })
                         .catch(this.handleError);
                 };
+                TestService.prototype.get = function (name) {
+                    return this.http.get(this._testUrl + '/' + name)
+                        .map(function (res) { return res.json().test; })
+                        .catch(this.handleError);
+                };
                 TestService.prototype.handleError = function (error) {
                     return Observable_1.Observable.throw(error._body || 'Server error');
                 };

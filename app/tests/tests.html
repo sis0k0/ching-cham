@@ -1,5 +1,5 @@
 <ul>
   <li *ngFor="#test of tests">
-    <p>{{ test.name }}</p>
+    <a [routerLink]="['Test', {name: test.name}]">{{ test.name }}</a>
   </li>
 </ul>

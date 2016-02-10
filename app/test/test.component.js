@@ -32,24 +32,16 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', '../models
             }],
         execute: function() {
             TestComponent = (function () {
-                // _params: RouteParams;
                 function TestComponent(_testService, _params) {
                     this._testService = _testService;
                     this._params = _params;
+                    this.difficulty = 'Intermediate';
                     this.questions = [new question_1.Question('', '')];
                     this.test = new test_1.Test('', this.questions);
-                    // console.log(params);
-                    // this._testService.get(params.get('name'))
-                    //     .subscribe(
-                    //     test => {
-                    //       this.test = test;
-                    //       console.log(this.test);  
-                    //     },
-                    //     error => this.errorMessage = <any>error);
                 }
-                TestComponent.prototype.ngOnInit = function () {
+                TestComponent.prototype.loadTest = function () {
                     var _this = this;
-                    this._testService.get(this._params.get('name'))
+                    this._testService.get(this._params.get('name'), this.difficulty)
                         .subscribe(function (test) {
                         _this.test = test;
                         console.log(_this.test);

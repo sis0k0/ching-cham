@@ -41,8 +41,8 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                         .map(function (res) { return res.json().tests; })
                         .catch(this.handleError);
                 };
-                TestService.prototype.get = function (name) {
-                    return this.http.get(this._testUrl + '/' + name)
+                TestService.prototype.get = function (name, difficulty) {
+                    return this.http.get(this._testUrl + '/' + name + '/' + difficulty)
                         .map(function (res) { return res.json().test; })
                         .catch(this.handleError);
                 };

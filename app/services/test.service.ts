@@ -26,8 +26,8 @@ export class TestService {
                     .catch(this.handleError);
   }
 
-  get (name: string) : Observable<Test> {
-    return this.http.get(this._testUrl + '/' + name)
+  get (name: string, difficulty: string) : Observable<Test> {
+    return this.http.get(this._testUrl + '/' + name + '/' + difficulty)
                 .map(res => <Test>res.json().test)
                 .catch(this.handleError);
   }

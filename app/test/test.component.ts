@@ -15,24 +15,18 @@ import {TestService} from '../services/test.service';
 })
 
 export class TestComponent {
-  questions: Question[] = [new Question('', '')];
-  test = new Test('', this.questions);
+  difficulty:string = 'Intermediate';
   errorMessage: string;
-  // _params: RouteParams;
+  questions: Question[] = [new Question('', '')];
+  test:Test = new Test('', this.questions);
 
-  constructor(private _testService: TestService, private _params: RouteParams) {
-    // console.log(params);
-    // this._testService.get(params.get('name'))
-    //     .subscribe(
-    //     test => {
-    //       this.test = test;
-    //       console.log(this.test);  
-    //     },
-    //     error => this.errorMessage = <any>error);
-  }
-
-  ngOnInit() {
-    this._testService.get(this._params.get('name'))
+  constructor(
+    private _testService: TestService,
+    private _params: RouteParams
+   ) { }
+  
+  loadTest() {
+    this._testService.get(this._params.get('name'), this.difficulty)
       .subscribe(
       test => {
         this.test = test;

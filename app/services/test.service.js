@@ -26,6 +26,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                 function TestService(http) {
                     this.http = http;
                     this._testUrl = '/api/test';
+                    this._allTestsUrl = '/api/tests';
                 }
                 TestService.prototype.create = function (test) {
                     var body = JSON.stringify({ test: test });
@@ -33,6 +34,11 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                     var options = new http_1.RequestOptions({ headers: headers });
                     return this.http.post(this._testUrl, body, options)
                         .map(function (res) { return res.json().test; })
+                        .catch(this.handleError);
+                };
+                TestService.prototype.getAll = function () {
+                    return this.http.get(this._allTestsUrl)
+                        .map(function (res) { return res.json().tests; })
                         .catch(this.handleError);
                 };
                 TestService.prototype.handleError = function (error) {

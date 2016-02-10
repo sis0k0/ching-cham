@@ -8,6 +8,7 @@ export class TestService {
   constructor (private http: Http) {}
 
   private _testUrl = '/api/test'
+  private _allTestsUrl = '/api/tests'
 
   create (test: any) : Observable<Test> {
     let body = JSON.stringify({ test });
@@ -16,6 +17,12 @@ export class TestService {
 
     return this.http.post(this._testUrl, body, options)
                     .map(res => <Test> res.json().test)
+                    .catch(this.handleError)
+  }
+
+  getAll () : Observable<Array<Test>> {
+    return this.http.get(this._allTestsUrl)
+                    .map(res => <Array<Test>> res.json().tests)
                     .catch(this.handleError)
   }
 

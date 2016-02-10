@@ -27,6 +27,11 @@ module Sinatra
 
         json(status: 'success', test: test)
       end
+
+      app.get '/api/tests' do
+        tests = Test.all
+        json(status: 'success', tests: tests)
+      end
     end
   end
 

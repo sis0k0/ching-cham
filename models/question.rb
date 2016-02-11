@@ -14,10 +14,10 @@ class Question
   field :difficulty, type: Float, default: 0.5
 
   validates_presence_of :question, message: 'question cannot be empty'
-  validates_length_of :question, within: 2..40, message: 'question must be between 2 and 40 characters long'
+  validates_length_of :question, within: 2..140, message: 'question must be between 2 and 140 characters long'
 
   validates_presence_of :answer, message: 'answer cannot be empty'
-  validates_length_of :answer, within: 2..40, message: 'answer must be between 2 and 40 characters long'
+  validates_length_of :answer, within: 2..140, message: 'answer must be between 2 and 140 characters long'
 
   embedded_in :test
 

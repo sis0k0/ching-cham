@@ -32,6 +32,9 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', '../servic
                     this._testService.getAll()
                         .subscribe(function (tests) { return _this.tests = tests; }, function (error) { return _this.errorMessage = error; });
                 }
+                TestsComponent.prototype.dateAsString = function (string) {
+                    return new Date(string);
+                };
                 TestsComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/tests/tests.html',

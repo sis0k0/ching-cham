@@ -3,11 +3,11 @@
 </div>
 
 <div class="container" [hidden]="started">
-  <h1>{{ test.name }}</h1>
+  <h1 class="text-capitalize">{{ test.name }}</h1>
   <form (ngSubmit)="loadTest()" #difficultyForm="ngForm">
 
     <div class="form-group">
-      <label for="difficulty">Test Difficulty</label>
+      <label for="difficulty">Choose test difficulty:</label>
       <select class="form-control" required
         [(ngModel)]="difficulty"
           ngControl="difficulty" #diff="ngForm" >
@@ -15,17 +15,21 @@
       </select>
     </div>
 
-    <button type="submit" class="btn btn-success btn-large">Start test</button>
+    <button type="submit" class="btn btn-success btn-lg text-center">Start test</button>
+    <button [routerLink]="['Tests']" class="btn btn-primary btn-lg">Return to tests</button>
   </form>
 </div>
 
 
 <div class="container" [hidden]="!started || completed">
-  <p>Question #{{ givenQuestions }}</p>
-  <p>Seconds left: {{10 - secondsPassed}}</p>
+  <h3 class="col-xs-5 text-left">Question #{{ givenQuestions }}</h3>
+  <h3 class="col-xs-5 col-xs-offset-2 text-right">Time left: 
+    <strong>{{10 - secondsPassed}}</strong>
+    seconds
+  </h3>
   <div class="form-group">
-    <label for="currentAnswer">{{ currentQuestion.question }}</label>
-    <input class="form-control"
+    <h2>{{ currentQuestion.question }}</h2>
+    <input autofocus class="form-control input-lg"
       [(ngModel)]="currentAnswer"
       (keypress)="($event.keyCode === 13) ? loadNextQuestion() : 0">
   </div>

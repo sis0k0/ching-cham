@@ -25,4 +25,8 @@ export class TestsComponent {
       tests => this.tests = tests,
       error => this.errorMessage = <any>error);
   }
+
+  dateAsString(string) {
+    return new Date(string);
+  }
 }

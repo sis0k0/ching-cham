@@ -114,6 +114,7 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', '../models
                             test_service_1.TestService,
                             score_service_1.ScoreService,
                         ],
+                        directives: [router_1.RouterLink],
                     }), 
                     __metadata('design:paramtypes', [test_service_1.TestService, score_service_1.ScoreService, router_1.RouteParams])
                 ], TestComponent);

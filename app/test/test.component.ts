@@ -1,7 +1,7 @@
 import {Component} from 'angular2/core';
 import {NgForm} from 'angular2/common';
 import {HTTP_PROVIDERS} from 'angular2/http';
-import {RouteParams} from 'angular2/router';
+import {RouteParams, RouterLink} from 'angular2/router';
 import { Test } from '../models/test';
 import { Score } from '../models/score';
 import { Question } from '../models/question';
@@ -15,6 +15,7 @@ import {ScoreService} from '../services/score.service';
     TestService,
     ScoreService,
   ],
+  directives: [RouterLink],
 })
 
 export class TestComponent {

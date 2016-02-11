@@ -6,6 +6,7 @@ export class Test {
   constructor(
     public name: string,
     public questions: Array<Question>,
-    public filled_by?: User
-  ) { }
+    public created_at?: Date,
+    public filled_by?: User)
+  { }
 }

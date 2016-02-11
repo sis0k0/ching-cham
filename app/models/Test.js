@@ -4,9 +4,10 @@ System.register([], function(exports_1) {
         setters:[],
         execute: function() {
             Test = (function () {
-                function Test(name, questions, filled_by) {
+                function Test(name, questions, created_at, filled_by) {
                     this.name = name;
                     this.questions = questions;
+                    this.created_at = created_at;
                     this.filled_by = filled_by;
                 }
                 return Test;

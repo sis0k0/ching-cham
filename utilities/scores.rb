@@ -52,10 +52,12 @@ module Sinatra
           sort(points: -1).
           map do |score|
             user = score.user.username if score.user
-            { user: user,
+            {
+              user: user,
               points: score.points,
-              achieved_at: score.achieved_at, }
-           end
+              achieved_at: score.achieved_at,
+            }
+          end
 
         json(status: 'success', scores: scores)
       end

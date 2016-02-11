@@ -1,0 +1,22 @@
+<div class="container">
+  <h1>{{ user.username }}</h1>
+
+  <h2>Highscores</h2>
+  <table class="table text-center">
+    <tr>
+      <td><strong>#</strong></td>
+      <td><strong>Test name</strong></td>
+      <td><strong>Points</strong></td>
+      <td><strong>Achieved at</strong></td>
+    </tr>
+    <tr *ngFor="#score of user.scores, #i = index">
+      <td>{{ i+1 }}</td>
+      <td><a [routerLink]="['Test', {name: score.test}]">{{ score.test }}</a></td>
+      <td>{{ score.points }}</td>
+      <td>{{ dateAsString(score.achieved_at) | date:'medium' }}</td>
+    </tr>
+  </table>
+
+  <a [routerLink]="['Home']" class="btn btn-primary">Return to Homepage</a>
+
+</div>

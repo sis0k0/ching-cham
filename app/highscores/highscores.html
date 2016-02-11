@@ -13,7 +13,7 @@
     [ngClass]="{'bg-success': !!current_user && current_user == score.user}">
       <td>{{ i+1 }}</td>
       <td>{{ score.points }}</td>
-      <td>{{ score.user }}</td>
+      <td><a [routerLink]="['User', {username: score.user}]">{{ score.user }}</a></td>
       <td>{{ dateAsString(score.achieved_at) | date:'medium' }}</td>
     </tr>
   </table>

@@ -10,6 +10,7 @@ export class UserService {
   private _loginUrl = '/api/login';
   private _registerUrl = '/api/register';
   private _logoutUrl = '/api/logout';
+  private _userUrl = '/api/user';
 
   login (user: any) : Observable<User>  {
     let body = JSON.stringify({ user });
@@ -38,6 +39,12 @@ export class UserService {
     return this.http.post(this._logoutUrl, '', options)
                     .map(res => res.status.toString())
                     .catch(this.handleError)
+  }
+
+  get (username: string) : Observable<User> {
+    return this.http.get(this._userUrl + '/' + username)
+                    .map(res => res.json().user)
+                    .catch(this.handleError);
   }
 
   private handleError (error: Response) {

@@ -3,6 +3,7 @@ module Sinatra
     module Helpers
       def login(user)
         session[:user_id] = user._id
+        session[:username] = user.username
         session[:user_role] = user.role
         json(status: 'success', user: user)
       end
@@ -12,8 +13,8 @@ module Sinatra
         status 200
       end
 
-      def protected(id: nil, role: nil)
-        halt 401 unless authorized?(id: id, role: role)
+      def protected(id: nil, username: nil, role: nil)
+        halt 401 unless authorized?(id: id, username: username, role: role)
       end
 
       def password_correct(user, password)
@@ -22,11 +23,12 @@ module Sinatra
 
       private
       
-      def authorized?(id: nil, role: nil)
-        is_same_user = (id == session[:user_id]) unless id.nil?
-        is_authorized = (role == session[:user_role]) unless role.nil?
+      def authorized?(id: nil, username: nil, role: nil)
+        same_id = id == session[:user_id] unless id.nil?
+        same_username = session[:username] unless username.nil?
+        authorized = (role == session[:user_role]) unless role.nil?
 
-        is_same_user or is_authorized
+        same_id or same_username or authorized
       end
     end
 
@@ -36,13 +38,11 @@ module Sinatra
       app.post '/api/register' do
         user_details = parsed_params[:user]
 
-        # user = User.new(parsed_params[:user])
         user = User.new(username: user_details[:username], email: user_details[:email])
-
         user.password = user_details[:password]
         user.save!
 
-        login user
+        login(user)
       end
 
       app.post '/api/login' do

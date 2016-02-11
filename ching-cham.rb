@@ -6,6 +6,7 @@ Bundler.require :default, ENV['RACK_ENV'].to_sym
 Mongoid.load!('./mongoid.yml')
 
 require_relative './utilities/auth'
+require_relative './utilities/users'
 require_relative './utilities/tests'
 require_relative './utilities/scores'
 require_relative './utilities/password'
@@ -26,6 +27,7 @@ module Api
 
       register ::Sinatra::Namespace
       register ::Sinatra::Auth
+      register ::Sinatra::Users
       register ::Sinatra::Tests
       register ::Sinatra::Scores
     end
@@ -37,16 +39,6 @@ module Api
     end
 
     namespace '/api' do
-      get '/users' do protected(role: 'admin')
-        users = User.all
-        json(status: 'success', users: users)
-      end
-
-      get '/user/:id' do protected(id: params['id'], role: 'admin')
-        user = User.find(params['id'])
-        json(success: 'success', user: user)
-      end
-
       error Mongoid::Errors::DocumentNotFound do |error|
         halt 404, "#{error.klass} not found."
       end
@@ -55,7 +47,12 @@ module Api
         halt 400, error.message
       end
 
+      error 401 do
+        halt 401, "You are not authorized for this route!"
+      end
+
       error 500 do
+        p error.message
         halt 500, "Something (really) bad happened! Please, try again later!"
       end
     end

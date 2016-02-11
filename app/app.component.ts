@@ -9,6 +9,7 @@ import {TestsComponent} from './tests/tests.component';
 import {CreateTestComponent} from './create-test/create-test.component';
 import {TestComponent} from './test/test.component';
 import {HighscoresComponent} from './highscores/highscores.component';
+import {UserComponent} from './user/user.component';
 
 import {UserService} from './services/user.service';
 
@@ -30,6 +31,7 @@ import {UserService} from './services/user.service';
   { path: '/test/:name', name: 'Test', component: TestComponent },
   { path: '/create-test', name: 'CreateTest', component: CreateTestComponent },
   { path: '/scores/:testName', name: 'Highscores', component: HighscoresComponent },
+  { path: '/user/:username', name: 'User', component: UserComponent},
 ])
 
 export class AppComponent {

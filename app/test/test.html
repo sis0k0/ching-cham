@@ -1,3 +1,7 @@
+<div class="container">
+  <p [hidden]="!errorMessage">{{ errorMessage }}</p>
+</div>
+
 <div class="container" [hidden]="started">
   <h1>{{ test.name }}</h1>
   <form (ngSubmit)="loadTest()" #difficultyForm="ngForm">
@@ -30,11 +34,11 @@
 </div>
 
 <div class="container" [hidden]="!completed">
-  <h1>FINAL!!</h1>
+  <h2>SCORE: {{ points }}</h2>
   <div *ngFor="#q of test.questions, #i = index">
     <h3>Question #{{i+1}}</h3>
     <h4>Question: {{q.question}}</h4>
     <p>Answer: {{q.givenAnswer}}</p>
-    <p>Time for answer: {{q.time_for_answer}}</p>
+    <p>Time for answer: {{q.timeForAnswerUser}}</p>
   </div>
 </div>

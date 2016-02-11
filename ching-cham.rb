@@ -7,6 +7,7 @@ Mongoid.load!('./mongoid.yml')
 
 require_relative './utilities/auth'
 require_relative './utilities/tests'
+require_relative './utilities/scores'
 require_relative './utilities/password'
 require_relative './utilities/json_helpers'
 
@@ -26,6 +27,7 @@ module Api
       register ::Sinatra::Namespace
       register ::Sinatra::Auth
       register ::Sinatra::Tests
+      register ::Sinatra::Scores
     end
 
     helpers JsonHelpers

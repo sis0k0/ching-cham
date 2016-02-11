@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'angular2/router', '../models/test', '../models/question', '../services/test.service'], function(exports_1) {
+System.register(['angular2/core', 'angular2/http', 'angular2/router', '../models/test', '../models/question', '../services/test.service', '../services/score.service'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', '../models
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, router_1, test_1, question_1, test_service_1;
+    var core_1, http_1, router_1, test_1, question_1, test_service_1, score_service_1;
     var TestComponent;
     return {
         setters:[
@@ -29,11 +29,15 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', '../models
             },
             function (test_service_1_1) {
                 test_service_1 = test_service_1_1;
+            },
+            function (score_service_1_1) {
+                score_service_1 = score_service_1_1;
             }],
         execute: function() {
             TestComponent = (function () {
-                function TestComponent(_testService, _params) {
+                function TestComponent(_testService, _scoreService, _params) {
                     this._testService = _testService;
+                    this._scoreService = _scoreService;
                     this._params = _params;
                     this.difficulties = ['Easy', 'Intermediate', 'High'];
                     this.difficulty = 'Intermediate';
@@ -45,6 +49,7 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', '../models
                     this.secondsPassed = 0;
                     this.questions = [new question_1.Question('', '')];
                     this.test = new test_1.Test(this._params.get('name'), this.questions);
+                    this.points = 0;
                 }
                 TestComponent.prototype.loadTest = function () {
                     var _this = this;
@@ -72,8 +77,8 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', '../models
                 };
                 TestComponent.prototype.setAnswer = function () {
                     this.test.questions[this.givenQuestions - 1].givenAnswer = this.currentAnswer;
-                    this.test.questions[this.givenQuestions - 1].time_for_answer += this.secondsPassed;
-                    this.test.questions[this.givenQuestions - 1].time_given += 10;
+                    this.test.questions[this.givenQuestions - 1].timeForAnswerUser = this.secondsPassed;
+                    this.test.questions[this.givenQuestions - 1].timeGivenUser = 10;
                     this.givenQuestions += 1;
                     this.secondsPassed = 0;
                     this.currentAnswer = '';
@@ -95,8 +100,11 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', '../models
                     }
                 };
                 TestComponent.prototype.calculateScore = function () {
+                    var _this = this;
                     this.completed = true;
                     this.stopQuestionInterval();
+                    this._scoreService.create(this.test)
+                        .subscribe(function (points) { return _this.points = points; }, function (error) { return _this.errorMessage = error; });
                 };
                 TestComponent = __decorate([
                     core_1.Component({
@@ -104,9 +112,10 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', '../models
                         providers: [
                             http_1.HTTP_PROVIDERS,
                             test_service_1.TestService,
+                            score_service_1.ScoreService,
                         ],
                     }), 
-                    __metadata('design:paramtypes', [test_service_1.TestService, router_1.RouteParams])
+                    __metadata('design:paramtypes', [test_service_1.TestService, score_service_1.ScoreService, router_1.RouteParams])
                 ], TestComponent);
                 return TestComponent;
             })();

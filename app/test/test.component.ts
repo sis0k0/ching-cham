@@ -3,14 +3,17 @@ import {NgForm} from 'angular2/common';
 import {HTTP_PROVIDERS} from 'angular2/http';
 import {RouteParams} from 'angular2/router';
 import { Test } from '../models/test';
+import { Score } from '../models/score';
 import { Question } from '../models/question';
 import {TestService} from '../services/test.service';
+import {ScoreService} from '../services/score.service';
 
 @Component({
   templateUrl: 'app/test/test.html',
   providers: [
     HTTP_PROVIDERS,
     TestService,
+    ScoreService,
   ],
 })
 
@@ -28,13 +31,16 @@ export class TestComponent {
   completed = false;
   secondsPassed = 0;
 
+
   constructor(
     private _testService: TestService,
+    private _scoreService: ScoreService,
     private _params: RouteParams
    ) { }
   
   questions: Question[] = [new Question('', '')];
   test:Test = new Test(this._params.get('name'), this.questions);
+  points = 0
 
   loadTest() {
     this._testService.get(this._params.get('name'), this.difficulty)
@@ -67,8 +73,8 @@ export class TestComponent {
 
   setAnswer() {
     this.test.questions[this.givenQuestions - 1].givenAnswer = this.currentAnswer;
-    this.test.questions[this.givenQuestions - 1].time_for_answer += this.secondsPassed;
-    this.test.questions[this.givenQuestions - 1].time_given += 10;
+    this.test.questions[this.givenQuestions - 1].timeForAnswerUser = this.secondsPassed;
+    this.test.questions[this.givenQuestions - 1].timeGivenUser = 10;    
     
     this.givenQuestions += 1;
     this.secondsPassed = 0;
@@ -93,5 +99,10 @@ export class TestComponent {
   calculateScore() {
     this.completed = true;
     this.stopQuestionInterval();
+    this._scoreService.create(this.test)
+        .subscribe(
+          points => this.points = points,
+          error => this.errorMessage = <any>error
+        );
   }
 }

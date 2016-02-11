@@ -9,6 +9,7 @@ export class TestService {
 
   private _testUrl = '/api/test';
   private _allTestsUrl = '/api/tests';
+  private _scoreUrl = '/api/test/calculate';
 
   create (test: any) : Observable<Test> {
     let body = JSON.stringify({ test });

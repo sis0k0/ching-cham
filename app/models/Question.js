@@ -4,12 +4,12 @@ System.register([], function(exports_1) {
         setters:[],
         execute: function() {
             Question = (function () {
-                function Question(question, answer, givenAnswer, time_given, time_for_answer) {
+                function Question(question, answer, givenAnswer, timeGivenUser, timeForAnswerUser) {
                     this.question = question;
                     this.answer = answer;
                     this.givenAnswer = givenAnswer;
-                    this.time_given = time_given;
-                    this.time_for_answer = time_for_answer;
+                    this.timeGivenUser = timeGivenUser;
+                    this.timeForAnswerUser = timeForAnswerUser;
                 }
                 return Question;
             })();

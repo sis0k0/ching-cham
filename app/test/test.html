@@ -34,11 +34,20 @@
 </div>
 
 <div class="container" [hidden]="!completed">
-  <h2>SCORE: {{ points }}</h2>
-  <div *ngFor="#q of test.questions, #i = index">
-    <h3>Question #{{i+1}}</h3>
-    <h4>Question: {{q.question}}</h4>
-    <p>Answer: {{q.givenAnswer}}</p>
-    <p>Time for answer: {{q.timeForAnswerUser}}</p>
+  <h1>Well, well, you have scored {{ points }} pts.</h1>
+  <div *ngFor="#q of test.questions, #i = index"
+  [ngClass]="{'bg-danger': q.givenAnswer != q.answer, 'bg-success': q.givenAnswer == q.answer}">
+    <div class="container">
+      <h3>Q#{{i+1}}. {{q.question}}</h3>
+      <div [hidden]="q.givenAnswer == q.answer">
+        <p>Correct answer: {{q.answer}}</p>
+        <p>Your answer: {{q.givenAnswer}}</p>
+      </div>
+      <div [hidden]="q.givenAnswer != q.answer">
+        <p>Answer: {{q.answer}}</p>
+      </div>
+      <p>Time for answer: {{q.timeForAnswerUser}}</p>
+    </div>
+    <hr>
   </div>
 </div>

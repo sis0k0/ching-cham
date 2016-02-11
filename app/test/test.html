@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [hidden]="started">
   <h1>{{ test.name }}</h1>
   <form (ngSubmit)="loadTest()" #difficultyForm="ngForm">
 
@@ -13,4 +13,28 @@
 
     <button type="submit" class="btn btn-success btn-large">Start test</button>
   </form>
+</div>
+
+
+<div class="container" [hidden]="!started || completed">
+  <p>Question #{{ givenQuestions }}</p>
+  <p>Seconds left: {{10 - secondsPassed}}</p>
+  <div class="form-group">
+    <label for="currentAnswer">{{ currentQuestion.question }}</label>
+    <input class="form-control"
+      [(ngModel)]="currentAnswer"
+      (keypress)="($event.keyCode === 13) ? loadNextQuestion() : 0">
+  </div>
+  <button class="btn btn-primary btn-large"
+    (click)="loadNextQuestion()">Next</button>
+</div>
+
+<div class="container" [hidden]="!completed">
+  <h1>FINAL!!</h1>
+  <div *ngFor="#q of test.questions, #i = index">
+    <h3>Question #{{i+1}}</h3>
+    <h4>Question: {{q.question}}</h4>
+    <p>Answer: {{q.givenAnswer}}</p>
+    <p>Time for answer: {{q.time_for_answer}}</p>
+  </div>
 </div>

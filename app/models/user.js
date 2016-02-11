@@ -4,12 +4,13 @@ System.register([], function(exports_1) {
         setters:[],
         execute: function() {
             User = (function () {
-                function User(username, password, email, role, scores) {
+                function User(username, password, email, role, scores, newPasssword) {
                     this.username = username;
                     this.password = password;
                     this.email = email;
                     this.role = role;
                     this.scores = scores;
+                    this.newPasssword = newPasssword;
                 }
                 return User;
             })();

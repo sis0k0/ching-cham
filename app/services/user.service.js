@@ -58,6 +58,14 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                         .map(function (res) { return res.json().user; })
                         .catch(this.handleError);
                 };
+                UserService.prototype.edit = function (user) {
+                    var body = JSON.stringify({ user: user });
+                    var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+                    var options = new http_1.RequestOptions({ headers: headers });
+                    return this.http.put(this._userUrl + '/' + user.username, body, options)
+                        .map(function (res) { return res.status.toString(); })
+                        .catch(this.handleError);
+                };
                 UserService.prototype.handleError = function (error) {
                     return Observable_1.Observable.throw(error._body || 'Server error');
                 };

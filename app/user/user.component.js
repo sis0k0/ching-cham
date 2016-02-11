@@ -29,14 +29,22 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', '../models
             }],
         execute: function() {
             UserComponent = (function () {
-                function UserComponent(_userService, _params) {
+                function UserComponent(_userService, _params, _router) {
                     var _this = this;
                     this._userService = _userService;
                     this._params = _params;
+                    this._router = _router;
+                    this.currentUser = localStorage.getItem('username');
+                    this.editUser = false;
                     this.user = new user_1.User('');
                     this._userService.get(this._params.get('username'))
                         .subscribe(function (user) { return _this.user = user; }, function (error) { return _this.errorMessage = error; });
                 }
+                UserComponent.prototype.edit = function () {
+                    var _this = this;
+                    this._userService.edit(this.user)
+                        .subscribe(function (success) { return _this._router.navigate(['Home']); }, function (error) { return _this.errorMessage = error; });
+                };
                 UserComponent.prototype.dateAsString = function (string) {
                     return new Date(string);
                 };
@@ -49,7 +57,7 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', '../models
                         ],
                         directives: [router_1.RouterLink],
                     }), 
-                    __metadata('design:paramtypes', [user_service_1.UserService, router_1.RouteParams])
+                    __metadata('design:paramtypes', [user_service_1.UserService, router_1.RouteParams, router_1.Router])
                 ], UserComponent);
                 return UserComponent;
             })();

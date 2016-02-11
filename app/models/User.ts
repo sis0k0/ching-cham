@@ -6,6 +6,7 @@ export class User {
     public password?: string,
     public email?: string,
     public role?: string,
-    public scores?: Array<Score>
+    public scores?: Array<Score>,
+    public newPasssword?: string
   ) { }
 }

@@ -1,5 +1,10 @@
-<div class="container">
+<p class="text-danger" [hidden]="!errorMessage">{{ errorMessage }}</p>    
+
+<div class="container" [hidden]="editUser">
   <h1>{{ user.username }}</h1>
+  <button class="btn btn-primary"
+    [hidden]="currentUser != user.username || editUser"
+    (click)="editUser = true">Edit user</button>
 
   <h2>Highscores</h2>
   <table class="table text-center">
@@ -16,7 +21,38 @@
       <td>{{ dateAsString(score.achieved_at) | date:'medium' }}</td>
     </tr>
   </table>
+</div>
 
-  <a [routerLink]="['Home']" class="btn btn-primary">Return to Homepage</a>
+<div class="container" [hidden]="!editUser">
+
+  <h1>Edit user {{ user.username }}</h1>
+  <form (ngSubmit)="edit()" #editUserForm="ngForm">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" autofocus required
+        [(ngModel)]="user.email"
+        ngControl="email" #email="ngForm">
+      <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+        Email is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Old Password</label>
+      <input type="password" class="form-control" required
+        [(ngModel)]="user.password"
+        ngControl="password" #password="ngForm">
+      <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+        Old Password is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="newPassword">New Password</label>
+      <input type="password" class="form-control"
+        [(ngModel)]="user.newPassword"
+        ngControl="newPassword" #newPassword="ngForm">
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="!editUserForm.form.valid">Edit</button>
+  </form>
 
 </div>

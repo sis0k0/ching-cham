@@ -2,7 +2,7 @@
   <div>
     <h1>Register Form</h1>
     <p class="text-danger" [hidden]="!errorMessage">{{errorMessage}}</p>    
-    <form *ngIf="active" (ngSubmit)="onSubmit()" #heroForm="ngForm">
+    <form *ngIf="active" (ngSubmit)="onSubmit()" #registerForm="ngForm">
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" class="form-control" autofocus required
@@ -31,7 +31,7 @@
         </div>
       </div>
       <button type="button" class="btn btn-danger" (click)="reset()">Reset</button>
-      <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Register</button>
+      <button type="submit" class="btn btn-success" [disabled]="!registerForm.form.valid">Register</button>
     </form>
   </div>
 </div>

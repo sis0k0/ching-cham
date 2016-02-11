@@ -12,7 +12,7 @@
 
     <div [hidden]='!username'>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Howdy, {{username}}!</a></li>
+        <li><a [routerLink]="['User', {username: username}]">Howdy, {{username}}!</a></li>
         <li><a href="#" (click)="logout()">Logout</a></li>
       </ul>
     </div>

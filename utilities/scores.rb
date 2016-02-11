@@ -46,7 +46,6 @@ module Sinatra
       end
 
       app.get '/api/score/:test_name' do
-        p parsed_params
         test = Test.find_by(name: parsed_params[:test_name])
         scores = Score.where(test: test).
           sort(points: -1).

@@ -1,6 +1,29 @@
 module Sinatra
   module Users
     module Helpers
+      def map_scores(user)
+        scores = []
+        user.scores.map do |score|
+          scores << {
+            points: score.points,
+            achieved_at: score.achieved_at,
+            test: score.test.name,
+          }
+        end
+        scores
+      end
+
+      def password_correct(user, password)
+        user.password == password
+      end
+
+      def update_user(user, new_details)
+        halt(422, 'Wrong password!') unless password_correct(user, new_details[:password])
+
+        user.email = new_details[:email] if new_details[:email]
+        user.password = new_details[:newPassword] if new_details[:newPassword]
+        user.save!
+      end
     end
 
     def self.registered(app)
@@ -17,32 +40,23 @@ module Sinatra
         user = {
           username: db_user.username,
           email: db_user.email,
+          scores: map_scores(db_user),
         }
-
-        user[:scores] = []
-        db_user.scores.each do |score|
-          user[:scores] << {
-            points: score.points,
-            achieved_at: score.achieved_at,
-            test: score.test.name,
-          }
-        end
 
         json(success: 'success', user: user)
       end
 
       app.put '/api/user/:username' do protected(username: params['username'], role: 'admin')
+        user_details = parsed_params[:user]
         user = User.find_by(username: params['username'])
-        user.email = parsed_params[:email] if parsed_params[:email]
-        user.password = parsed_params[:password] if parsed_params[:password]
-        user.save!
+        update_user(user, user_details)
 
-        json(success: 'success', user: user)
+        status 200
       end
 
       app.delete '/api/user/:username' do protected(username: params['username'], role: 'admin')
         User.find_by(username: params[:username]).delete
-        json(success: 'success')
+        status 200
       end
     end
   end

@@ -47,6 +47,16 @@ export class UserService {
                     .catch(this.handleError);
   }
 
+  edit(user: User): Observable<string> {
+    let body = JSON.stringify({ user });
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.put(this._userUrl + '/' + user.username, body, options)
+                    .map(res => res.status.toString())
+                    .catch(this.handleError);
+  }
+
   private handleError (error: Response) {
     return Observable.throw(error._body || 'Server error');
   }

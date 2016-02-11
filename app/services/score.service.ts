@@ -23,6 +23,12 @@ export class ScoreService {
                     .catch(this.handleError);
   }
 
+  get (testName: string) : Observable<Array<Score>> {
+    return this.http.get(this._scoreUrl + '/' + testName)
+                    .map(res => <Array<Score>>res.json().scores)
+                    .catch(this.handleError);
+  }
+
   private handleError (error: Response) {
     return Observable.throw(error._body || 'Server error');
   }

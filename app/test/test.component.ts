@@ -32,7 +32,6 @@ export class TestComponent {
   completed = false;
   secondsPassed = 0;
 
-
   constructor(
     private _testService: TestService,
     private _scoreService: ScoreService,

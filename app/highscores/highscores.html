@@ -1,0 +1,23 @@
+<div class="container">
+  <h1 class="text-capitalize">{{ testName }}</h1>
+  <h2 [hidden]="scores.length">No scores yet!</h2>
+  
+  <table class="table text-center" [hidden]="!scores.length">
+    <tr>
+      <td><strong>#</strong></td>
+      <td><strong>Points</strong></td>
+      <td><strong>User</strong></td>
+      <td><strong>Achieved at</strong></td>
+    </tr>
+    <tr *ngFor="#score of scores, #i = index"
+    [ngClass]="{'bg-success': !!current_user && current_user == score.user}">
+      <td>{{ i+1 }}</td>
+      <td>{{ score.points }}</td>
+      <td>{{ score.user }}</td>
+      <td>{{ dateAsString(score.achieved_at) | date:'medium' }}</td>
+    </tr>
+  </table>
+
+  <a [routerLink]="['Test', {name: testName}]" class="btn btn-success">Make the test!</a>
+  <a [routerLink]="['Tests']" class="btn btn-primary">Return to Tests</a>
+</div>

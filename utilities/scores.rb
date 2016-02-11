@@ -44,6 +44,21 @@ module Sinatra
         
         json(status: 'success', points: score.points)
       end
+
+      app.get '/api/score/:test_name' do
+        p parsed_params
+        test = Test.find_by(name: parsed_params[:test_name])
+        scores = Score.where(test: test).
+          sort(points: -1).
+          map do |score|
+            user = score.user.username if score.user
+            { user: user,
+              points: score.points,
+              achieved_at: score.achieved_at, }
+           end
+
+        json(status: 'success', scores: scores)
+      end
     end
   end
 

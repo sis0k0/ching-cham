@@ -4,11 +4,13 @@
       <td><strong>#</strong></td>
       <td><strong>Test name</strong></td>
       <td><strong>Created at</strong></td>
+      <td><strong>Highscores</strong></td>
     </tr>
     <tr *ngFor="#test of tests, #i = index">
-      <td><a [routerLink]="['Test', {name: test.name}]" >{{ i+1 }}</a></td>
-      <td><a [routerLink]="['Test', {name: test.name}]" >{{ test.name }}</a></td>
-      <td><a [routerLink]="['Test', {name: test.name}]" >{{ dateAsString(test.created_at) | date:'medium' }}</a></td>
+      <td><a [routerLink]="['Test', {name: test.name}]">{{ i+1 }}</a></td>
+      <td><a [routerLink]="['Test', {name: test.name}]">{{ test.name }}</a></td>
+      <td><a [routerLink]="['Test', {name: test.name}]">{{ dateAsString(test.created_at) | date:'medium' }}</a></td>
+      <td><a [routerLink]="['Highscores', {testName: test.name}]">Highscores</a></td>
     </tr>
   </table>
 

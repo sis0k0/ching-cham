@@ -37,6 +37,11 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                         .map(function (res) { return res.json().points; })
                         .catch(this.handleError);
                 };
+                ScoreService.prototype.get = function (testName) {
+                    return this.http.get(this._scoreUrl + '/' + testName)
+                        .map(function (res) { return res.json().scores; })
+                        .catch(this.handleError);
+                };
                 ScoreService.prototype.handleError = function (error) {
                     return Observable_1.Observable.throw(error._body || 'Server error');
                 };

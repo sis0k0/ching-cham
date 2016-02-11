@@ -41,14 +41,14 @@ export class AppComponent {
   }
 
   ngDoCheck() {
-    this.username = sessionStorage.getItem('username');
+    this.username = localStorage.getItem('username');
   }
 
   logout() {
     this._userService.logout()
       .subscribe(
         success => {
-          sessionStorage.clear();
+          localStorage.clear();
           this._router.parent.navigate(['Home']);
         },
         error => this.errorMessage = <any>error);

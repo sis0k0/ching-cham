@@ -11,7 +11,7 @@ export class ScoreService {
   private _scoreUrl = '/api/score';
 
   create (test: Test) : Observable<number> {
-	  let username = sessionStorage.getItem('username');
+	  let username = localStorage.getItem('username');
 	  test.filled_by = username;
 
     let body = JSON.stringify({ test });

@@ -26,7 +26,7 @@ export class RegisterComponent {
     this._userService.register(this.model)
       .subscribe(
       user => {
-        sessionStorage.setItem('username', user.username);
+        localStorage.setItem('username', user.username);
         this._router.parent.navigate(['Home']);
       },
       error => this.errorMessage = <any>error);

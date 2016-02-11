@@ -49,13 +49,13 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', './home/ho
                     this._userService = _userService;
                 }
                 AppComponent.prototype.ngDoCheck = function () {
-                    this.username = sessionStorage.getItem('username');
+                    this.username = localStorage.getItem('username');
                 };
                 AppComponent.prototype.logout = function () {
                     var _this = this;
                     this._userService.logout()
                         .subscribe(function (success) {
-                        sessionStorage.clear();
+                        localStorage.clear();
                         _this._router.parent.navigate(['Home']);
                     }, function (error) { return _this.errorMessage = error; });
                 };

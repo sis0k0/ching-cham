@@ -28,7 +28,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                     this._scoreUrl = '/api/score';
                 }
                 ScoreService.prototype.create = function (test) {
-                    var username = sessionStorage.getItem('username');
+                    var username = localStorage.getItem('username');
                     test.filled_by = username;
                     var body = JSON.stringify({ test: test });
                     var headers = new http_1.Headers({ 'Content-Type': 'application/json' });

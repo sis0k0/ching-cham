@@ -27,6 +27,7 @@ end
 group :test do
   gem 'minitest', '~> 5.4.1'
   gem 'minitest-rg'
+  gem 'minifacture'
   gem 'rack-test', '~> 0.6.3'
   gem 'mocha', '~> 1.1', require: false
   gem 'codeclimate-test-reporter', require: false

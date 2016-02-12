@@ -3,11 +3,11 @@ require_relative '../spec_helper'
 describe 'Model::QuestionModel', :unit do
   let(:valid_question) { 'This is a valid question, isn\'t it?' }
   let(:too_short_question) { 'q' }
-  let(:too_long_question) { 'wookiewookiewookiewookiewookiewookiewookie' }
+  let(:too_long_question) { 'wookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookiewookie' }
 
   let(:valid_answer) { 'valid answer' }
   let(:too_short_answer) { 'a' }
-  let(:too_long_answer) { 'chewiechewiechewiechewiechewiechewiechewie' }
+  let(:too_long_answer) { 'chewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewiechewie' }
 
   describe 'Creates Test with Questions', :unit do
     def teardown

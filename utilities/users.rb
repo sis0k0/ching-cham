@@ -44,7 +44,7 @@ module Sinatra
           scores: map_scores(db_user),
         }
 
-        json(success: 'success', user: user)
+        json(status: 'success', user: user)
       end
 
       app.put '/api/user/:username' do protected(username: params['username'], role: 'admin')

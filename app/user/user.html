@@ -3,8 +3,12 @@
 <div class="container" [hidden]="editUser">
   <h1>{{ user.username }}</h1>
   <button class="btn btn-primary"
-    *ngIf="(currentUser == user.username) && !editUser"
-    (click)="editUser = true">Edit user</button>
+    *ngIf="(currentUser == user.username || currentRole == 'admin') && !editUser"
+    (click)="editUser = true">Edit profile</button>
+
+  <button class="btn btn-danger"
+    *ngIf="(currentUser == user.username || currentRole == 'admin') && !editUser"
+    (click)="delete()">Delete profile</button>
 
   <h2>Highscores</h2>
   <table class="table text-center">

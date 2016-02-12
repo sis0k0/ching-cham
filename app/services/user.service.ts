@@ -64,6 +64,12 @@ export class UserService {
                     .catch(this.handleError);
   }
 
+  delete(username: string): Observable<string> {
+    return this.http.delete(this._userUrl + '/' + username)
+                    .map(res => res.status.toString())
+                    .catch(this.handleError);
+  }
+
   private handleError (error: Response) {
     return Observable.throw(error._body || 'Server error');
   }

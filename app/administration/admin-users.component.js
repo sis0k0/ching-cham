@@ -24,11 +24,19 @@ System.register(['angular2/core', 'angular2/router', '../services/user.service']
         execute: function() {
             AdminUsersComponent = (function () {
                 function AdminUsersComponent(_userService) {
-                    var _this = this;
                     this._userService = _userService;
+                    this.load();
+                }
+                AdminUsersComponent.prototype.load = function () {
+                    var _this = this;
                     this._userService.getAll()
                         .subscribe(function (users) { return _this.users = users; }, function (error) { return _this.errorMessage = error; });
-                }
+                };
+                AdminUsersComponent.prototype.delete = function (username) {
+                    var _this = this;
+                    this._userService.delete(username)
+                        .subscribe(function (success) { return _this.load(); }, function (error) { return _this.errorMessage = error; });
+                };
                 AdminUsersComponent.prototype.dateAsString = function (string) {
                     return new Date(string);
                 };

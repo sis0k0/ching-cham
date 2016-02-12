@@ -17,6 +17,7 @@ import {UserService} from '../services/user.service';
 
 export class UserComponent {
   currentUser = localStorage.getItem('username');
+  currentRole = localStorage.getItem('role');
   editUser = false;
   user: User = new User('');
   errorMessage: string;
@@ -36,6 +37,22 @@ export class UserComponent {
       .subscribe(
         success => this._router.navigate(['Home']),
         error => this.errorMessage = <any>error); 
+  }
+
+  delete() {
+    this._userService.delete(this.user.username)
+      .subscribe(
+        success => {
+          if(this.currentUser == this.user.username) {
+            this._userService.logout()
+              .subscribe(
+                success => this._router.navigate(['Home']),
+                error => this.errorMessage = <any>error)
+          } else {
+            this._router.navigate(['Home']);
+          }
+        },
+        error => this.errorMessage = <any>error);
   }
 
   dateAsString(string) {

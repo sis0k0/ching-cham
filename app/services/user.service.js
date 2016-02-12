@@ -72,6 +72,11 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
                         .map(function (res) { return res.status.toString(); })
                         .catch(this.handleError);
                 };
+                UserService.prototype.delete = function (username) {
+                    return this.http.delete(this._userUrl + '/' + username)
+                        .map(function (res) { return res.status.toString(); })
+                        .catch(this.handleError);
+                };
                 UserService.prototype.handleError = function (error) {
                     return Observable_1.Observable.throw(error._body || 'Server error');
                 };

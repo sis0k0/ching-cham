@@ -35,6 +35,7 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', '../models
                     this._params = _params;
                     this._router = _router;
                     this.currentUser = localStorage.getItem('username');
+                    this.currentRole = localStorage.getItem('role');
                     this.editUser = false;
                     this.user = new user_1.User('');
                     this._userService.get(this._params.get('username'))
@@ -44,6 +45,19 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', '../models
                     var _this = this;
                     this._userService.edit(this.user)
                         .subscribe(function (success) { return _this._router.navigate(['Home']); }, function (error) { return _this.errorMessage = error; });
+                };
+                UserComponent.prototype.delete = function () {
+                    var _this = this;
+                    this._userService.delete(this.user.username)
+                        .subscribe(function (success) {
+                        if (_this.currentUser == _this.user.username) {
+                            _this._userService.logout()
+                                .subscribe(function (success) { return _this._router.navigate(['Home']); }, function (error) { return _this.errorMessage = error; });
+                        }
+                        else {
+                            _this._router.navigate(['Home']);
+                        }
+                    }, function (error) { return _this.errorMessage = error; });
                 };
                 UserComponent.prototype.dateAsString = function (string) {
                     return new Date(string);

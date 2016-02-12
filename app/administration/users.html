@@ -10,12 +10,14 @@
       <td><strong>Username</strong></td>
       <td><strong>Email</strong></td>
       <td><strong>Registered at</strong></td>
+      <td><strong>Delete profile</strong></td>
     </tr>
     <tr *ngFor="#user of users, #i = index">
       <td>{{ i+1 }}</td>
       <td>{{ user.username }}</td>
       <td>{{ user.email }}</td>
       <td>{{ dateAsString(user.registered_at) | date:'medium' }}</td>
+      <td><a class="btn btn-danger" (click)="delete(user.username)">Delete</a>
     </tr>
   </table>
 

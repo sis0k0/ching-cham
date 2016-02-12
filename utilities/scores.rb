@@ -22,6 +22,19 @@ module Sinatra
           end
         end
       end
+
+      def scores(test)
+        Score.where(test: test).
+          sort(points: -1).
+          map do |score|
+            user = score.user.username if score.user
+            {
+              user: user,
+              points: score.points,
+              achieved_at: score.achieved_at,
+            }
+          end
+      end
     end
 
     def self.registered(app)
@@ -47,16 +60,7 @@ module Sinatra
 
       app.get '/api/score/:test_name' do
         test = Test.find_by(name: parsed_params[:test_name])
-        scores = Score.where(test: test).
-          sort(points: -1).
-          map do |score|
-            user = score.user.username if score.user
-            {
-              user: user,
-              points: score.points,
-              achieved_at: score.achieved_at,
-            }
-          end
+        scores = scores(test)
 
         json(status: 'success', scores: scores)
       end

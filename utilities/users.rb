@@ -4,6 +4,7 @@ module Sinatra
       def map_scores(user)
         scores = []
         user.scores.map do |score|
+
           scores << {
             points: score.points,
             achieved_at: score.achieved_at,

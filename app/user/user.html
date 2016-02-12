@@ -3,7 +3,7 @@
 <div class="container" [hidden]="editUser">
   <h1>{{ user.username }}</h1>
   <button class="btn btn-primary"
-    [hidden]="currentUser != user.username || editUser"
+    *ngIf="(currentUser == user.username) && !editUser"
     (click)="editUser = true">Edit user</button>
 
   <h2>Highscores</h2>

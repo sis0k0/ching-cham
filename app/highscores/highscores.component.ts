@@ -25,7 +25,7 @@ export class HighscoresComponent {
     private _params: RouteParams) {
     this._scoreService.get(this.testName)
       .subscribe(
-        scores =>  this.scores = scores,
+        scores => this.scores = scores,
         error => this.errorMessage = <any>error);
   }
 

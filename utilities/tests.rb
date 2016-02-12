@@ -59,7 +59,7 @@ module Sinatra
       end
 
       app.get '/api/tests' do
-        tests = Test.all
+        tests = Test.all.only(:name, :created_at)
         json(status: 'success', tests: tests)
       end
 

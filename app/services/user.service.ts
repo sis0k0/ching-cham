@@ -11,6 +11,7 @@ export class UserService {
   private _registerUrl = '/api/register';
   private _logoutUrl = '/api/logout';
   private _userUrl = '/api/user';
+  private _usersUrl = '/api/users';
 
   login (user: any) : Observable<User>  {
     let body = JSON.stringify({ user });
@@ -43,8 +44,14 @@ export class UserService {
 
   get (username: string) : Observable<User> {
     return this.http.get(this._userUrl + '/' + username)
-                    .map(res => res.json().user)
+                    .map(res => <User> res.json().user)
                     .catch(this.handleError);
+  }
+
+  getAll () : Observable<Array<User>> {
+    return this.http.get(this._usersUrl)
+                    .map(res => <Array<User>> res.json().users)
+                    .catch(this.handleError)
   }
 
   edit(user: User): Observable<string> {

@@ -1,4 +1,23 @@
 <div class="container">
   <h1>Users</h1>
+  <p class="text-danger"
+    [hidden]="!errorMessage">{{ errorMessage }}</p>
+
+  <table class="table text-center"
+    [hidden]="errorMessage">
+    <tr>
+      <td><strong>#</strong></td>
+      <td><strong>Username</strong></td>
+      <td><strong>Email</strong></td>
+      <td><strong>Registered at</strong></td>
+    </tr>
+    <tr *ngFor="#user of users, #i = index">
+      <td>{{ i+1 }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ dateAsString(user.registered_at) | date:'medium' }}</td>
+    </tr>
+  </table>
+
   <a class="btn btn-primary" [routerLink]="['Admin']">Back to administration</a>
 </div>

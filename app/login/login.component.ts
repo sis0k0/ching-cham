@@ -27,6 +27,7 @@ export class LoginComponent {
                       .subscribe(
                         user => {
                           localStorage.setItem('username', user.username);
+                          localStorage.setItem('role', user.role);
                           this._router.parent.navigate(['Home']);
                         },
                         error => this.errorMessage = <any>error);

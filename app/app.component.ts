@@ -10,6 +10,9 @@ import {CreateTestComponent} from './create-test/create-test.component';
 import {TestComponent} from './test/test.component';
 import {HighscoresComponent} from './highscores/highscores.component';
 import {UserComponent} from './user/user.component';
+import {AdministrationComponent} from './administration/administration.component';
+import {AdminTestsComponent} from './administration/admin-tests.component';
+import {AdminUsersComponent} from './administration/admin-users.component';
 
 import {UserService} from './services/user.service';
 
@@ -32,10 +35,15 @@ import {UserService} from './services/user.service';
   { path: '/create-test', name: 'CreateTest', component: CreateTestComponent },
   { path: '/scores/:testName', name: 'Highscores', component: HighscoresComponent },
   { path: '/user/:username', name: 'User', component: UserComponent},
+  
+  { path: '/administration', name: 'Admin', component: AdministrationComponent },
+  { path: '/administration/tests', name: 'AdminTests', component: AdminTestsComponent },
+  { path: '/administration/users', name: 'AdminUsers', component: AdminUsersComponent },
 ])
 
 export class AppComponent {
   username: string;
+  role: string;
   errorMessage: string;
 
   constructor(
@@ -46,6 +54,7 @@ export class AppComponent {
 
   ngDoCheck() {
     this.username = localStorage.getItem('username');
+    this.role = localStorage.getItem('role');
   }
 
   logout() {

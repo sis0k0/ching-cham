@@ -15,6 +15,7 @@ require_relative 'support/unit_helpers.rb'
 
 class UnitTest < MiniTest::Spec
   include UnitHelpers
+  include Rack::Test::Methods
 
   register_spec_type(self) do |description, *test_types|
     true if description.is_a?(Class)

@@ -52,7 +52,6 @@ module Api
       end
 
       error 500 do
-        p error.message
         halt 500, "Something (really) bad happened! Please, try again later!"
       end
     end

@@ -116,6 +116,28 @@ describe 'Api::UsersStory', :story do
 
 # ----------- PUT /api/user/:username -----------
 
+  # describe 'PUT /api/user/:username when admin' do
+  #   before do
+  #     @user = Factory.create :user
+  #     @updated_user = {
+  #       username: @user.username,
+  #       email: @user.email + 'a',
+  #       password: @user.password,
+  #     }
+
+  #     current_session.rack_session[:user_role] = 'admin'
+  #     put("api/user/#{@user.username}", user: @updated_user)
+  #   end
+    
+  #   it 'responds successfully' do
+  #     p last_response.body
+  #     last_response.status.must_equal 200
+  #   end
+  # end
+  # 
+
+# ----------- PUT /api/user/:username -----------
+
   describe 'DELETE /api/user/:username when admin' do
     before do
       @user = Factory.create :user

@@ -6,12 +6,10 @@ module StoryHelpers
 
   def post_json(url, data)
     post(url, json(data),  'CONTENT_TYPE' => 'application/json')
-    json_parse(last_response.body)
   end
 
   def put_json(url, data)
     put(url, json(data),  'CONTENT_TYPE' => 'application/json')
-    json_parse(last_response.body)
   end
 
   def delete_json(path)

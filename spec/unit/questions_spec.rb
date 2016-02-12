@@ -14,6 +14,10 @@ describe 'Model::QuestionModel', :unit do
       Test.delete_all
     end
 
+    def setup
+      Test.delete_all
+    end
+
     it 'creates when given valid data' do
       Test.create(
         name: 'valid name',

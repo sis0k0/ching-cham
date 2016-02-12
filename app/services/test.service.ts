@@ -29,8 +29,14 @@ export class TestService {
 
   get (name: string, difficulty: string) : Observable<Test> {
     return this.http.get(this._testUrl + '/' + name + '/' + difficulty)
-                .map(res => <Test>res.json().test)
-                .catch(this.handleError);
+                    .map(res => <Test>res.json().test)
+                    .catch(this.handleError);
+  }
+
+  delete (name: string) : Observable<string> {
+    return this.http.delete(this._testUrl + '/' + name)
+                    .map(res => res.status.toString())
+                    .catch(this.handleError);
   }
 
   private handleError (error: Response) {

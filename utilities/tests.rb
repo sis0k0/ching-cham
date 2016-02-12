@@ -5,16 +5,14 @@ module Sinatra
         questions.map do |q|
           Question.new(
             question: q[:question],
-            answer: q[:answer]
-          )
+            answer: q[:answer])
         end
       end
 
       def generate_test(test)
         test = Test.new(
           name: test[:name],
-          questions: generate_questions(test[:questions])
-        )
+          questions: generate_questions(test[:questions]))
       end
 
       def select_questions(questions, difficulty)
@@ -68,6 +66,11 @@ module Sinatra
         test.questions = select_questions(test.questions, params['difficulty'])
 
         json(status: 'success', test: test)
+      end
+
+      app.delete '/api/test/:name' do protected(role: 'admin')
+        Test.find_by(name: params[:name]).delete
+        status 200
       end
     end
   end

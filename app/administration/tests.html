@@ -1,4 +1,23 @@
 <div class="container">
   <h1>Tests</h1>
+  <p class="text-danger"
+    [hidden]="!errorMessage">{{ errorMessage }}</p>
+
+  <table class="table text-center"
+    [hidden]="errorMessage">
+    <tr>
+      <td><strong>#</strong></td>
+      <td><strong>Name</strong></td>
+      <td><strong>Created at</strong></td>
+      <td><strong>Delete test</strong></td>
+    </tr>
+    <tr *ngFor="#test of tests, #i = index">
+      <td>{{ i+1 }}</td>
+      <td>{{ test.name }}</td>
+      <td>{{ dateAsString(test.created_at) | date:'medium' }}</td>
+      <td><a class="btn btn-danger" (click)="delete(test.name)">Delete</a>
+    </tr>
+  </table>
+
   <a class="btn btn-primary" [routerLink]="['Admin']">Back to administration</a>
 </div>

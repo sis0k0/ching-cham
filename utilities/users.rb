@@ -32,7 +32,6 @@ module Sinatra
 
       app.get '/api/users' do protected(role: 'admin')
         users = User.all.without(:password)
-        p users
         json(status: 'success', users: users)
       end
 

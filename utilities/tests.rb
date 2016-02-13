@@ -24,12 +24,13 @@ module Sinatra
 
       def extract(questions, difficulty)
         size = extract_size(questions.length)
-
         case difficulty.downcase
         when 'easy'
           questions.take(size)
         when 'intermediate'
-          questions.slice((questions.length - size)/2, size)
+          other_questions = (questions.length - size)/2
+          last_question_index = other_questions + other_questions
+          questions.slice!(other_questions..last_question_index)
         when 'hard'
           questions.reverse.take(size)
         else

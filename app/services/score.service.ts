@@ -19,8 +19,8 @@ export class ScoreService {
     let options = new RequestOptions({ headers: headers });
 
     return this.http.post(this._scoreUrl, body, options)
-										.map(res => <number>res.json().points)
-                    .catch(this.handleError);
+		.map(res => <number>res.json().points)
+                .catch(this.handleError);
   }
 
   get (testName: string) : Observable<Array<Score>> {
